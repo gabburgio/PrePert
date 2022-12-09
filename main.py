@@ -25,3 +25,4 @@ for i in range(M):
     psi_tilde=sweeper.transport_sweep(psi_tilde,J,a,False)
     psi+=psi_tilde
 print(psi)
+print("out")
