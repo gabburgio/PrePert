@@ -26,3 +26,4 @@ for i in range(SI_number):
     psi_tilde=sweeper.transport_sweep(psi_tilde,slab_size,PN_order)
     psi+=psi_tilde
 print(psi)
+print("nne")
