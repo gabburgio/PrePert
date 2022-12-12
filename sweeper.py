@@ -9,11 +9,8 @@ def transport_sweep(old_psi,slab_size,PN_order, boundary_conditions=None, ext_so
     angle_number=np.shape(old_psi)[1]
     points=np.polynomial.legendre.leggauss(angle_number)[0]
 
-    #get cross section moments
-    cross_section_moments=Xsection_moments.calculate_Xsection_moments(10,10)
-
-    #get new scattering source
-    source=source_calculator.Calculate_source(old_psi,PN_order,cross_section_moments,ext_source)
+    #get new scattering source    
+    source=source_calculator.Calculate_source(old_psi,PN_order,ext_source)
 
     #new flux calculation
     new_psi=np.zeros(np.shape(old_psi))

@@ -1,9 +1,12 @@
 import numpy as np
 import scipy
 from scipy.special import legendre
+import Xsection_moments
 
+#get cross section moments
+cross_section_moments=Xsection_moments.calculate_Xsection_moments(10,10)
 
-def Calculate_source(old_psi, PN_order, cross_section_moments, ext_source=None):
+def Calculate_source(old_psi, PN_order, ext_source=None):
 
     segments_number=np.shape(old_psi)[0]
     angle_number=np.shape(old_psi)[1]
@@ -22,15 +25,18 @@ def Calculate_source(old_psi, PN_order, cross_section_moments, ext_source=None):
         for j in range(PN_order):
             old_flux_moments[i][j]=np.dot(old_psi[i]*legendre_poly_values[j],weights)
     
+    
     #scattering source calculation
     for i in range(segments_number):
         for j in range(angle_number):
             for k in range(PN_order):
                 source[i][j]+=(k+0.5)*cross_section_moments[k]*old_flux_moments[i][k]*legendre_poly_values[k][j]
-            
+    
+
     #adding external source
     if(ext_source is not None):
         for i in range(segments_number):
             source[i]+=ext_source*weights
+            
 
     return source
