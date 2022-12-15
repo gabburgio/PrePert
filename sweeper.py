@@ -1,7 +1,8 @@
 import numpy as np
-import Xsection_moments
+import Cross_sections
 import source_calculator
-Sigma_t=1.5  
+
+Sigma_t=Cross_sections.Sigma_t
 
 def transport_sweep(old_psi,slab_size,PN_order, boundary_conditions=None, ext_source=None):
 
@@ -10,7 +11,7 @@ def transport_sweep(old_psi,slab_size,PN_order, boundary_conditions=None, ext_so
     points=np.polynomial.legendre.leggauss(angle_number)[0]
 
     #get new scattering source    
-    source=source_calculator.Calculate_source(old_psi,PN_order,ext_source)
+    source=source_calculator.Calculate_source(old_psi,PN_order,slab_size,ext_source)
 
     #new flux calculation
     new_psi=np.zeros(np.shape(old_psi))

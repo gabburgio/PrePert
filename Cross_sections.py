@@ -2,15 +2,16 @@ import numpy as np
 import scipy
 from scipy.special import legendre
 
+Sigma_t=3 
 #Functional expression of the scattering cross section
 
 def Sigma_s(u):     
-    return 0.5      #This is Sigma_s as a function, this means its angular integral (here 1) must be less than the total cross section
+    return 0.5+pow(u,2)      #This is Sigma_s as a function, this means its angular integral (here 1) must be less than the total cross section
 vec_Sigma_s=np.vectorize(Sigma_s)
 
 #calculate Legendre moments of the scattering cross-section
 
-def calculate_Xsection_moments(quadrature_points_number,number_of_moments):
+def calculate_moments(quadrature_points_number,number_of_moments):
     cross_section_moments=np.zeros(number_of_moments)
     moment_quadrature_points=np.polynomial.legendre.leggauss(quadrature_points_number)[0]
     moment_quadrature_weights=np.polynomial.legendre.leggauss(quadrature_points_number)[1]

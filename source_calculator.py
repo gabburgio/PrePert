@@ -1,12 +1,12 @@
 import numpy as np
 import scipy
 from scipy.special import legendre
-import Xsection_moments
+import Cross_sections
 
 #get cross section moments
-cross_section_moments=Xsection_moments.calculate_Xsection_moments(10,10)
+cross_section_moments=Cross_sections.calculate_moments(10,10)
 
-def Calculate_source(old_psi, PN_order, ext_source=None):
+def Calculate_source(old_psi, PN_order,slab_size , ext_source=None):
 
     segments_number=np.shape(old_psi)[0]
     angle_number=np.shape(old_psi)[1]
@@ -35,9 +35,9 @@ def Calculate_source(old_psi, PN_order, ext_source=None):
 
     #adding external source
     if(ext_source is not None):
-        addend=np.full((segments_number,angle_number), ext_source/2)
-        source+=addend
-        
-            
+        for i in range(segments_number):
+            for j in range(angle_number):
+                source[i][j]+=ext_source(points[j],i*(slab_size/segments_number))
+                    
 
     return source
