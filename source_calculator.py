@@ -35,8 +35,9 @@ def Calculate_source(old_psi, PN_order, ext_source=None):
 
     #adding external source
     if(ext_source is not None):
-        for i in range(segments_number):
-            source[i]+=ext_source*weights
+        addend=np.full((segments_number,angle_number), ext_source/2)
+        source+=addend
+        
             
 
     return source

@@ -3,11 +3,11 @@ import sweeper
 
 #to add: multigroups in energy, non diamond differencing, Q as a function
 slab_size= 10   
-segments_number= 30  
-angle_number= 5    
+segments_number= 50  
+angle_number=10    
 EnGroup_number= 30   
 e_source=1     
-SI_number=50  #number of internal (source) iterations
+SI_number=70  #number of internal (source) iterations
 PN_order=5
 
 def boundary_condition_1(u):
